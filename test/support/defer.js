@@ -83,12 +83,12 @@ app.use(async function controllers(ctx) {
       await switchHttpOnly(ctx);
       break;
     case '/session/regenerate':
-      await regenerate(ctx);
+      await regenerateTheSession(ctx);
       break;
     case '/session/regenerateWithData':
       let session = await ctx.session;
       session.foo = 'bar';
-      session = await regenerate(ctx);
+      session = await regenerateTheSession(ctx);
       ctx.body = { foo : session.foo, hasSession: session !== undefined };
       break;
     default:
@@ -128,8 +128,8 @@ function other(ctx) {
   ctx.body = ctx.session ? 'has session' : 'no session';
 }
 
-async function regenerate(ctx) {
-  const session = await ctx.regenerateSession();
+async function regenerateTheSession(ctx) {
+  const session = await ctx.regenerate();
   session.data = 'foo';
   ctx.body = ctx.sessionId;
   return session;

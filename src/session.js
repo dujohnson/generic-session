@@ -334,7 +334,7 @@ module.exports = function(options = {}) {
       return refreshSession(ctx, ctx.session, result.originalHash, result.isNew)
     }
 
-    ctx.regenerateSession = async function regenerateSession() {
+    ctx.regenerate = async function regenerate() {
       debug('regenerating session')
       if (!result.isNew) {
         // destroy the old session
@@ -437,7 +437,7 @@ module.exports = function(options = {}) {
       return refreshSession(ctx, ctx.session, result.originalHash, result.isNew)
     }
 
-    ctx.regenerateSession = async function regenerateSession() {
+    ctx.regenerate = async function regenerate() {
       debug('regenerating session')
       // make sure that the session has been loaded
       await ctx.session

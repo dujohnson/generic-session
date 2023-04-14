@@ -112,11 +112,11 @@ app.use(async function controllers(ctx) {
       getId(ctx);
       break;
     case '/session/regenerate':
-      await regenerate(ctx);
+      await regenerateTheSession(ctx);
       break;
     case '/session/regenerateWithData':
       ctx.session.foo = 'bar';
-      await regenerate(ctx);
+      await regenerateTheSession(ctx);
       ctx.body = { foo: ctx.session.foo, hasSession: ctx.session !== undefined };
       break;
     default:
@@ -159,8 +159,8 @@ function getId(ctx) {
   ctx.body = ctx.sessionId;
 }
 
-async function regenerate(ctx) {
-  await ctx.regenerateSession();
+async function regenerateTheSession(ctx) {
+  await ctx.regenerate();
   ctx.session.data = 'foo';
   getId(ctx);
 }
